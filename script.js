@@ -29,14 +29,9 @@ function store() {
         // Clear previous error messages
         errorDiv.innerHTML = '';
 
-        // Validate form fields
-        if (title === "") {
-            displayError('Title is required.', errorDiv);
-            return;
-        }
-
-        if (description === "") {
-            displayError('Description is required.', errorDiv);
+        
+        if ((title === "")&&(description === "")) {
+            displayError('Enter Fields',errorDiv);
             return;
         }
 
@@ -55,9 +50,22 @@ function store() {
     });
 }
 
+document.querySelector('.close-btn').addEventListener('click', function() {
+    modal.classList.add('hide');
+});
+
 function displayError(message, errorDiv) {
     const errorMessage = document.createElement('div');
     errorMessage.textContent = message;
     errorMessage.classList.add('error-message');
     errorDiv.appendChild(errorMessage);
+    
+    errorDiv.classList.remove('hide');
+    
+    setTimeout(function() { // hide after 3
+        errorDiv.classList.add('hide');
+        
+        errorMessage.textContent = '';
+    }, 3000);
 }
+
