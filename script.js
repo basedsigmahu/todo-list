@@ -13,41 +13,60 @@ function open() {
 }
 
 store();
-
+const status = ['Pending', 'In Progress', 'Done'];
 function store() {
     document.querySelector('.create-task form').addEventListener('submit', function(event) {
-        event.preventDefault(); // Prevent default form submission
-
+        event.preventDefault(); 
+    
         const form = event.target;
         const title = form.querySelector('.title').value.trim();
         const description = form.querySelector('.description').value.trim();
         const priority = form.querySelector('#taskpriority').value;
         const isImportant = form.querySelector('#importantCheckbox').checked;
-
+    
         const errorDiv = form.querySelector('.error'); 
-
-        // Clear previous error messages
+    
+        // clr prv error msg
         errorDiv.innerHTML = '';
-
-        
-        if ((title === "")&&(description === "")) {
-            displayError('Enter Fields',errorDiv);
+    
+        if (title === "" && description === "") {
+            displayError('Enter Fields', errorDiv);
             return;
         }
-
+    
+        
         const task = {
             title: title,
             description: description,
             priority: priority,
-            isImportant: isImportant
+            isImportant: isImportant,
+            status: 0
         };
-        console.log("Form submitted");
-        const taskJSON = JSON.stringify(task);
-        localStorage.setItem('taskData', taskJSON);
-        alert('Task data stored !');
+    
+        // get data or create new
+        let tasks = JSON.parse(localStorage.getItem('tasksData')) || [];
+    
+        
+        tasks.push(task);
+    
+        // store updated
+        localStorage.setItem('tasksData', JSON.stringify(tasks));
+    
+        console.log("Form submitted and task added to storage");
+    
+        alert('Task data stored!');
         modal.classList.add('hide');
         form.reset();
     });
+    
+    //display error messages
+    function displayError(message, errorDiv) {
+        const errorMessage = document.createElement('p');
+        errorMessage.textContent = message;
+        errorMessage.style.color = 'red';
+        errorDiv.appendChild(errorMessage);
+    }
+    
 }
 
 document.querySelector('.close-btn').addEventListener('click', function() {
