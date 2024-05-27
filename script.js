@@ -13,7 +13,9 @@ function open() {
 }
 
 store();
+
 const status = ['Pending', 'In Progress', 'Done'];
+
 function store() {
     document.querySelector('.create-task form').addEventListener('submit', function(event) {
         event.preventDefault(); 
@@ -26,7 +28,7 @@ function store() {
     
         const errorDiv = form.querySelector('.error'); 
     
-        // clr prv error msg
+        // Clear previous error message
         errorDiv.innerHTML = '';
     
         if (title === "" && description === "") {
@@ -34,7 +36,6 @@ function store() {
             return;
         }
     
-        
         const task = {
             title: title,
             description: description,
@@ -43,13 +44,11 @@ function store() {
             status: 0
         };
     
-        // get data or create new
+        // Get data or create new
         let tasks = JSON.parse(localStorage.getItem('tasksData')) || [];
-    
-        
         tasks.push(task);
     
-        // store updated
+        // Store updated
         localStorage.setItem('tasksData', JSON.stringify(tasks));
     
         console.log("Form submitted and task added to storage");
@@ -57,21 +56,29 @@ function store() {
         alert('Task data stored!');
         modal.classList.add('hide');
         form.reset();
+        loadTasks();
     });
-    
-    //display error messages
-    function displayError(message, errorDiv) {
-        const errorMessage = document.createElement('p');
-        errorMessage.textContent = message;
-        errorMessage.style.color = 'red';
-        errorDiv.appendChild(errorMessage);
-    }
-    
 }
 
-document.querySelector('.close-btn').addEventListener('click', function() {
-    modal.classList.add('hide');
-});
+function loadTasks() {
+    let tasks = JSON.parse(localStorage.getItem('tasksData')) || [];
+    const taskContainer = document.querySelector('.all');
+
+    // Clear any existing tasks
+    taskContainer.innerHTML = '';
+
+    tasks.forEach(task => {
+        const taskElement = document.createElement('div');
+        taskElement.classList.add('task-dsp');
+        taskElement.innerHTML = `
+            <h3>${task.title}</h3>
+            <p>${task.description}</p>
+            <p>Priority: ${task.priority}</p>
+            <p>Important: ${task.isImportant ? 'Yes' : 'No'}</p>
+        `;
+        taskContainer.appendChild(taskElement);
+    });
+}
 
 function displayError(message, errorDiv) {
     const errorMessage = document.createElement('div');
@@ -81,10 +88,19 @@ function displayError(message, errorDiv) {
     
     errorDiv.classList.remove('hide');
     
-    setTimeout(function() { // hide after 3
+    setTimeout(function() { // Hide after 3 seconds
         errorDiv.classList.add('hide');
-        
         errorMessage.textContent = '';
     }, 3000);
 }
 
+document.querySelector('.allTab').addEventListener('click', function(event) {
+    event.preventDefault(); // Prevent the default anchor behavior
+    document.querySelector('.allmain').classList.remove('hide');
+    loadTasks();
+});
+
+// Add event listener for the close button
+document.querySelector('.close-btn').addEventListener('click', function() {
+    modal.classList.add('hide');
+});
