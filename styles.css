@@ -58,6 +58,10 @@ li{
 li:hover{
     background-color: lightgray;
 }
+a{
+    text-decoration: none;
+    color: black;
+}
 .hide{
     display: none;
 }
@@ -130,4 +134,30 @@ li:hover{
     height: 30px;
     border-radius: 4px;
     cursor: pointer;
+}
+.allmain{
+    justify-self: center; 
+    align-self: center; 
+}
+.all {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 900px;
+    margin-top: 25px;
+    border-radius: 12px;
+    background-color: beige;
+    height: auto;
+    padding: 20px;
+}
+.task-dsp {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 750px;
+    margin: 10px 0;
+    height: auto;
+    border-radius: 15px;
+    background-color: aqua;
+    padding: 10px;
 }
