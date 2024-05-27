@@ -1,4 +1,10 @@
+document.addEventListener('DOMContentLoaded', function() {
+    // Trigger click event on the "All" tab to display it by default
+    document.querySelector('.allTab').click();
+});
+
 const modal = document.querySelector('.create-task');
+
 open();
 
 function open() {
