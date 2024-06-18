@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const modalMain = document.querySelector('.modal-main');
     const createTaskButton = document.querySelector('.create-task');
     const close = document.querySelector('.close-btn');
-
+    document.querySelector('.all-tab').click();
     function showModal() {
         modalMain.classList.remove('hide');
     }
