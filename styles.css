@@ -8,7 +8,7 @@
     overflow-y: auto;
     overflow-x: hidden;
 }
-.container {
+.container{
     width: 1200px;
     margin: 10px auto;
     border: 1px solid black;
@@ -16,157 +16,145 @@
     flex-direction: column;
     height: 1000px;
 }
-.txt {
-    color: black;
-    margin: 10px;
-    font-size: 25px;
-    font-weight: 700;
+.txt{
+    font-size: x-large;
+    font-weight: bold;
+    margin: 8px;
 }
-.tsk {
+hr{
+    margin-top: 7px;
+    margin-bottom: 7px;
+}
+.create-task{
     margin-left: auto;
     margin-right: 10px;
     width: 90px;
     height: 30px;
     border-radius: 4px;
+}
+.create-task:hover{
+cursor: pointer;
+}
+
+.state-of-task {
+    display: flex;
+    border-bottom: 2px solid #ccc;
+    width: 1000px;
+    margin-top: 20px;
+    align-self: center;
+  }
+  
+  .state-of-task button {
+    
+    flex: 1;
+    padding: 10px 20px;
+    background-color: #f1f1f1;
+    border: 2px solid black;
     cursor: pointer;
-}
-.tsk:hover{
-    background-color: lightgray;
-}
-.hr-above {
-    margin-bottom: 10px;
-}
-.hr-below {
-    margin-top: 10px; 
-}
-ul {
-    display: flex;
-    list-style: none;
-    flex-direction: row;
-    margin-left: 10px;
-    margin-top: 10px;
+    font-size: 16px;
+    transition: background-color 0.3s, border-bottom-color 0.3s;
+  }
+  
+  .state-of-task button:not(:last-child) {
+    border-right: 1px solid #ccc;
+  }
+  
+  .state-of-task button:hover,
+  .state-of-task button.active {
+    background-color: #ddd;
+    border-bottom: 3px solid #2196F3;
+  }
+  
+  .state-of-task button:focus {
+    outline: none;
+  }
+
+ .radio-btn{
+  display: flex;
+  justify-self: baseline;
+  gap: 5px;
+ }
+
+ .hide {
+  display: none !important;
 }
 
-li {
-    border: 1px solid black;
-    height: 40px;
-    width: 100px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    padding: 0;  /* Reset padding */
+.modal-main {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(250, 248, 248, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  transition: visibility 0s, opacity 0.3s ease-in-out;
 }
 
-a {
-    text-decoration: none;
-    color: black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-}
-
-li:hover {
-    background-color: lightgray;
-}
-.hide{
-    display: none;
-}
-.create-task{
-    position: fixed;
-    z-index: 9999;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.5);
-    justify-content: center;
-    align-items: center;
-   
-
-}
-.popup{
-    background-color: #fefefe;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-    max-width: 500px;
-    height: 400px;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-.title{
-    width: 300px;
-    height: 30px;
-    margin-left:  5px;
+.modal {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  max-width: 500px;
+  width: 100%;
+  margin-left: 10px;
 }
 .close-btn {
-    color: #aaa;
-    margin-left: 430px;/* other than this jugaad not able to go right */
-    background: none;
-    border: none;
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
+  background: none;     
+  border: none;          /* Remove border */
+  padding: 0;            /* Remove padding */
+  margin: 0;             /* Remove margin */
+  outline: none;         /* Remove outline */
+  cursor: pointer;       
+  top: 10px;             
+  right: 10px;           
 }
-.close-btn:hover,
-.close-btn:focus {
-    color: black;
-    text-decoration: none;
+
+/* Span styling */
+.close-btn span {
+  font-size: 24px;       /* Size of the "×" */
+  color: #aaa;           /* Initial color */
 }
-.txt1{
-    color: black;
-    margin: 5px;
-    font-size: 15px;
-    font-weight: 580;
+
+.close-btn span:hover {
+  color: #000;           /* Hover color */
 }
-.description{
-    width: 420px;    /*width less than this causes task to come same line & priority to next. idk how to solve that*/
-    height: 50px;
-    margin-left:  5px; 
-}
-.checkbox-label{
-    margin: 5px;
-}
-.checkbox-container{
-    display: flex;
-    justify-self: baseline;
-}
+
 .submit-btn{
-    margin: 15px;
-    width: 90px;
-    height: 30px;
+    width: 50px;
+    height: 25px;
     border-radius: 4px;
     cursor: pointer;
+
 }
+
 .allmain{
-    justify-self: center; 
-    align-self: center; 
+  justify-self: center; 
+  align-self: center; 
 }
 .all {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 900px;
-    margin-top: 25px;
-    border-radius: 12px;
-    background-color: beige;
-    height: auto;
-    padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 900px;
+  margin-top: 25px;
+  border-radius: 12px;
+  background-color: beige;
+  height: auto;
+  padding: 20px;
 }
 .task-dsp {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 750px;
-    margin: 10px 0;
-    height: auto;
-    border-radius: 15px;
-    background-color: aqua;
-    padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 750px;
+  margin: 10px 0;
+  height: auto;
+  border-radius: 15px;
+  background-color: aqua;
+  padding: 10px;
 }
+  
