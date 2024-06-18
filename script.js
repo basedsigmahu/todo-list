@@ -106,6 +106,36 @@ function loadTasks(){
         taskContainer.appendChild(taskElement);
     });
 }
+const impBtn = document.querySelector('.imp-tab');
+impBtn.addEventListener('click', function(event) {
+    event.preventDefault(); // Prevent default behavior if necessary
+    loadImportantTasks(); // Call the function to load and display important tasks
+});
+
+function loadImportantTasks(){
+    let tasks = JSON.parse(localStorage.getItem('tasksData')) || [];
+    const taskContainer = document.querySelector('.all');
+
+    // Clear any existing tasks
+    taskContainer.innerHTML = '';
+
+     // Filter tasks to get only important ones
+     const importantTasks = tasks.filter(task => task.isImportant);
+
+     // Display only important tasks
+     importantTasks.forEach(task => {
+         const taskElement = document.createElement('div');
+         taskElement.classList.add('task-dsp');
+         taskElement.innerHTML = `
+             <h3>${task.title}</h3>
+             <p>${task.description}</p>
+             <p>Important: Yes</p>
+             <p>Status: ${task.status}</p>
+         `;
+         taskContainer.appendChild(taskElement);
+     });
+ }
+
 
 function displayError(message, errorDiv) {
     const errorMessage = document.createElement('div');
