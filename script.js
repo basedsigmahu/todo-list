@@ -1,72 +1,89 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Trigger click event on the "All" tab to display it by default
-    document.querySelector('.allTab').click();
-});
+    const modalMain = document.querySelector('.modal-main');
+    const createTaskButton = document.querySelector('.create-task');
+    const close = document.querySelector('.close-btn');
 
-const modal = document.querySelector('.create-task');
-
-open();
-
-function open() {
-    modal.classList.add('hide');
-    const openbtn = document.querySelector('.tsk');
-
-    function openmodal() {
-        modal.classList.remove('hide');
+    function showModal() {
+        modalMain.classList.remove('hide');
     }
 
-    openbtn.addEventListener('click', openmodal);
-}
+    function closeModal() {
+        modalMain.classList.add('hide');
+    }
 
-store();
+    createTaskButton.addEventListener('click', showModal);
+    close.addEventListener('click', closeModal);
 
-const status = ['Pending', 'In Progress', 'Done'];
+    store();
+    loadTasks(); // Load tasks initially when the page loads
+
+    document.querySelector('.all-tab').addEventListener('click', function(event) {
+        event.preventDefault(); // Prevent the default anchor behavior
+        document.querySelector('.allmain').classList.remove('hide');
+        loadTasks();
+    });
+});
 
 function store() {
-    document.querySelector('.create-task form').addEventListener('submit', function(event) {
+    document.querySelector('.modal-main form').addEventListener('submit', function(event) {
         event.preventDefault(); 
-    
+
         const form = event.target;
         const title = form.querySelector('.title').value.trim();
         const description = form.querySelector('.description').value.trim();
-        const priority = form.querySelector('#taskpriority').value;
-        const isImportant = form.querySelector('#importantCheckbox').checked;
-    
+        const isImportant = form.querySelector('.isImp').checked;
+
+        // Get all radio buttons within the 'radio-btn' div
+        const radioButtons = form.querySelectorAll('input[name="task-status"]');
+        let selectedValue = null;
+
+        // Loop through the radio buttons to find the checked one
+        for (const radioButton of radioButtons) {
+            if (radioButton.checked) {
+                selectedValue = radioButton.value;
+                break; // Exit the loop once a checked radio button is found
+            }
+        }
+
         const errorDiv = form.querySelector('.error'); 
-    
+        
         // Clear previous error message
         errorDiv.innerHTML = '';
-    
-        if (title === "" && description === "") {
+
+        if (title === "" || description === "") {
             displayError('Enter Fields', errorDiv);
             return;
         }
-    
+
         const task = {
             title: title,
             description: description,
-            priority: priority,
             isImportant: isImportant,
-            status: 0
+            status: selectedValue // Store the value of the selected radio button
         };
-    
+
         // Get data or create new
         let tasks = JSON.parse(localStorage.getItem('tasksData')) || [];
         tasks.push(task);
-    
-        // Store updated
+
+        // Store updated tasks array in local storage
         localStorage.setItem('tasksData', JSON.stringify(tasks));
-    
+
         console.log("Form submitted and task added to storage");
-    
+
         alert('Task data stored!');
+        
+        // Hide the modal and reset the form
+        const modal = document.querySelector('.modal-main');
         modal.classList.add('hide');
         form.reset();
+
+        // to display tasks from local storage
         loadTasks();
     });
 }
 
-function loadTasks() {
+function loadTasks(){
     let tasks = JSON.parse(localStorage.getItem('tasksData')) || [];
     const taskContainer = document.querySelector('.all');
 
@@ -79,8 +96,8 @@ function loadTasks() {
         taskElement.innerHTML = `
             <h3>${task.title}</h3>
             <p>${task.description}</p>
-            <p>Priority: ${task.priority}</p>
             <p>Important: ${task.isImportant ? 'Yes' : 'No'}</p>
+            <p>Status: ${task.status}</p>
         `;
         taskContainer.appendChild(taskElement);
     });
@@ -99,14 +116,3 @@ function displayError(message, errorDiv) {
         errorMessage.textContent = '';
     }, 3000);
 }
-
-document.querySelector('.allTab').addEventListener('click', function(event) {
-    event.preventDefault(); // Prevent the default anchor behavior
-    document.querySelector('.allmain').classList.remove('hide');
-    loadTasks();
-});
-
-// Add event listener for the close button
-document.querySelector('.close-btn').addEventListener('click', function() {
-    modal.classList.add('hide');
-});
