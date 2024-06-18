@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const modalMain = document.querySelector('.modal-main');
     const createTaskButton = document.querySelector('.create-task');
     const close = document.querySelector('.close-btn');
-
+    
     function showModal() {
         modalMain.classList.remove('hide');
     }
@@ -17,11 +17,15 @@ document.addEventListener('DOMContentLoaded', function() {
     store();
     loadTasks(); // Load tasks initially when the page loads
 
-    document.querySelector('.all-tab').addEventListener('click', function(event) {
+    const allTabButton = document.querySelector('.all-tab');
+    allTabButton.addEventListener('click', function(event) {
         event.preventDefault(); // Prevent the default anchor behavior
         document.querySelector('.allmain').classList.remove('hide');
         loadTasks();
     });
+
+    // Trigger the click event on the "all-tab" button when the page loads
+    allTabButton.click();
 });
 
 function store() {
