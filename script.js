@@ -35,7 +35,7 @@ function store() {
         const form = event.target;
         const title = form.querySelector('.title').value.trim();
         const description = form.querySelector('.description').value.trim();
-        const isImportant = form.querySelector('.isImp').checked;
+        const isImportant = form.querySelector('#importantCheckbox').checked; // Ensure this is correctly getting the checkbox value
 
         // Get all radio buttons within the 'radio-btn' div
         const radioButtons = form.querySelectorAll('input[name="task-status"]');
@@ -106,6 +106,7 @@ function loadTasks(){
         taskContainer.appendChild(taskElement);
     });
 }
+
 const impBtn = document.querySelector('.imp-tab');
 impBtn.addEventListener('click', function(event) {
     event.preventDefault(); // Prevent default behavior if necessary
@@ -134,7 +135,7 @@ function loadImportantTasks(){
          `;
          taskContainer.appendChild(taskElement);
      });
- }
+}
 
 
 function displayError(message, errorDiv) {
