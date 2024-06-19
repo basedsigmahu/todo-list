@@ -75,7 +75,7 @@ function store() {
 
         console.log("Form submitted and task added to storage");
 
-        alert('Task data stored!');
+        
         
         // Hide the modal and reset the form
         const modal = document.querySelector('.modal-main');
