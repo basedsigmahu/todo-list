@@ -107,6 +107,58 @@ function loadTasks(){
     });
 }
 
+const compBtn = document.querySelector('.completed-tab');
+compBtn.addEventListener('click',function(event){
+    event.preventDefault();
+    loadcompTasks();
+});
+
+function loadcompTasks(){
+    let tasks = JSON.parse(localStorage.getItem('tasksData')) || [];
+    const taskContainer = document.querySelector('.all');
+
+    // Clear any existing tasks
+    taskContainer.innerHTML = '';
+    const compTasks = tasks.filter(task => task.status === 'completed');
+
+    compTasks.forEach(task => {
+        const taskElement = document.createElement('div');
+        taskElement.classList.add('task-dsp');
+        taskElement.innerHTML = `
+            <h3>${task.title}</h3>
+            <p>${task.description}</p>
+            <p>Important: ${task.isImportant ? 'Yes' : 'No'}</p>
+            <p>Status: ${task.status}</p>
+        `;
+        taskContainer.appendChild(taskElement);
+    });
+}
+const pendingBtn = document.querySelector('.pending-tab');
+pendingBtn.addEventListener('click',function(event){
+    event.preventDefault();
+    loadPendingTasks();
+});
+
+function loadPendingTasks(){
+    let tasks = JSON.parse(localStorage.getItem('tasksData')) || [];
+    const taskContainer = document.querySelector('.all');
+
+    // Clear any existing tasks
+    taskContainer.innerHTML = '';
+    const pendingTasks = tasks.filter(task => task.status === 'pending');
+
+    pendingTasks.forEach(task => {
+        const taskElement = document.createElement('div');
+        taskElement.classList.add('task-dsp');
+        taskElement.innerHTML = `
+            <h3>${task.title}</h3>
+            <p>${task.description}</p>
+            <p>Important: ${task.isImportant ? 'Yes' : 'No'}</p>
+            <p>Status: ${task.status}</p>
+        `;
+        taskContainer.appendChild(taskElement);
+    });
+}
 const impBtn = document.querySelector('.imp-tab');
 impBtn.addEventListener('click', function(event) {
     event.preventDefault(); // Prevent default behavior if necessary
