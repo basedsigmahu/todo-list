@@ -64,6 +64,9 @@ cursor: pointer;
     background-color: #ddd;
     border-bottom: 3px solid #2196F3;
   }
+  .state-of-task button.active {
+    background-color: #2196F3;
+    color: white;}
   
   .state-of-task button:focus {
     outline: none;
@@ -85,7 +88,7 @@ cursor: pointer;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(250, 248, 248, 0.5);
+  background: rgba(0, 0, 0, 0.6); /* Darker background */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -95,41 +98,82 @@ cursor: pointer;
 
 .modal {
   background: white;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  max-width: 500px;
+  padding: 30px; /*  padding for  spacing */
+  border-radius: 12px; 
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Deeper shadow */
+  max-width: 600px; 
   width: 100%;
-  margin-left: 10px;
+  margin: 0 20px; 
+  position: relative; 
+  transition: transform 0.3s ease, opacity 0.3s ease; 
 }
+
 .close-btn {
-  background: none;     
-  border: none;          /* Remove border */
-  padding: 0;            /* Remove padding */
-  margin: 0;             /* Remove margin */
-  outline: none;         /* Remove outline */
-  cursor: pointer;       
-  top: 10px;             
-  right: 10px;           
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  outline: none;
+  cursor: pointer;
+  position: absolute; 
+  top: 20px; 
+  right: 20px; 
+  font-size: 24px;
+  color: #aaa;
+  transition: color 0.3s; 
 }
 
-/* Span styling */
-.close-btn span {
-  font-size: 24px;       /* Size of the "×" */
-  color: #aaa;           /* Initial color */
+.close-btn:hover {
+  color: #f44336; 
 }
 
-.close-btn span:hover {
-  color: #000;           /* Hover color */
+.submit-btn {
+  width: 100px; 
+  height: 35px; 
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: #4CAF50; 
+  color: white; 
+  border: none; 
+  font-size: 16px; 
+  transition: background-color 0.3s; 
+  display: block; 
+  margin: 20px auto 0; 
 }
 
-.submit-btn{
-    width: 50px;
-    height: 25px;
-    border-radius: 4px;
-    cursor: pointer;
-
+.submit-btn:hover {
+  background-color: #45a049; 
 }
+
+.submit-btn:active {
+  background-color: #3e8e41; 
+}
+
+/* Additional styling for form elements */
+input[type="text"], textarea {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+input[type="text"]:focus, textarea:focus {
+  border-color: #2196F3; /* Blue border on focus */
+  outline: none; /* Remove default outline */
+}
+
+/* Styling for the checkbox and radio buttons */
+.checkbox-container, .radio-btn {
+  margin: 10px 0;
+}
+
+.checkbox-container input, .radio-btn input {
+  margin-right: 10px;
+}
+
 
 .allmain{
   justify-self: center; 
