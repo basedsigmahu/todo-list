@@ -217,6 +217,26 @@ input[type="text"]:focus, textarea:focus {
 .edit-btn:hover {
   background-color: #0056b3;
 }
+
+.delete-btn {
+  width: 80px;
+  height: 30px;
+  background-color: #ff4d4d; /* Red color */
+  color: white;
+  border: none;
+  font-size: 14px;
+  margin-top: 10px;
+  margin-right: 10px;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.delete-btn:hover {
+  background-color: #ff1a1a; /* Darker red on hover */
+}
+
 @media (max-width: 768px) {
   .container {
       width: 95%;
