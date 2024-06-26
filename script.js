@@ -62,7 +62,15 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     allTabButton.click();
-
+    
+    function deleteTask(index) {
+        let tasks = JSON.parse(localStorage.getItem('tasksData')) || [];
+        tasks.splice(index, 1); // Remove the task at the given index
+    
+        localStorage.setItem('tasksData', JSON.stringify(tasks)); // Update local storage
+        loadcompTasks(); // Reload the tasks to reflect the deletion
+    }
+    
     function store() {
         document.querySelector('.modal-main form').addEventListener('submit', function(event) {
             event.preventDefault();
@@ -122,43 +130,148 @@ document.addEventListener('DOMContentLoaded', function() {
     function loadTasks() {
         let tasks = JSON.parse(localStorage.getItem('tasksData')) || [];
         const taskContainer = document.querySelector('.all');
-
+    
         taskContainer.innerHTML = '';
-
+    
         tasks.forEach((task, index) => {
             const taskElement = document.createElement('div');
             taskElement.classList.add('task-dsp');
             taskElement.dataset.index = index;
-
+    
             const titleElement = document.createElement('h3');
             titleElement.textContent = task.title;
-
+    
             const descriptionElement = document.createElement('p');
             descriptionElement.textContent = task.description;
-
+    
             const importantElement = document.createElement('p');
             importantElement.textContent = `Important: ${task.isImportant ? 'Yes' : 'No'}`;
-
+    
             const statusElement = document.createElement('p');
             statusElement.textContent = `Status: ${task.status}`;
-
+    
             const editButton = document.createElement('button');
             editButton.textContent = 'Edit';
             editButton.classList.add('edit-btn');
             editButton.addEventListener('click', () => {
                 editTask(index);
             });
-
+    
+            const deleteButton = document.createElement('button');
+            deleteButton.textContent = 'Delete';
+            deleteButton.classList.add('delete-btn');
+            deleteButton.addEventListener('click', () => {
+                deleteTask(index);
+            });
+    
             taskElement.appendChild(titleElement);
             taskElement.appendChild(descriptionElement);
             taskElement.appendChild(importantElement);
             taskElement.appendChild(statusElement);
             taskElement.appendChild(editButton);
-
+            taskElement.appendChild(deleteButton);
+    
             taskContainer.appendChild(taskElement);
         });
     }
-
+    
+    function loadPendingTasks() {
+        let tasks = JSON.parse(localStorage.getItem('tasksData')) || [];
+        const taskContainer = document.querySelector('.all');
+    
+        taskContainer.innerHTML = '';
+        const pendingTasks = tasks.filter(task => task.status === 'pending');
+    
+        pendingTasks.forEach((task, index) => {
+            const taskElement = document.createElement('div');
+            taskElement.classList.add('task-dsp');
+            taskElement.dataset.index = index;
+    
+            const titleElement = document.createElement('h3');
+            titleElement.textContent = task.title;
+    
+            const descriptionElement = document.createElement('p');
+            descriptionElement.textContent = task.description;
+    
+            const importantElement = document.createElement('p');
+            importantElement.textContent = `Important: ${task.isImportant ? 'Yes' : 'No'}`;
+    
+            const statusElement = document.createElement('p');
+            statusElement.textContent = `Status: ${task.status}`;
+    
+            const editButton = document.createElement('button');
+            editButton.textContent = 'Edit';
+            editButton.classList.add('edit-btn');
+            editButton.addEventListener('click', () => {
+                editTask(tasks.findIndex(t => t === task)); // Find the actual index in the original tasks array
+            });
+    
+            const deleteButton = document.createElement('button');
+            deleteButton.textContent = 'Delete';
+            deleteButton.classList.add('delete-btn');
+            deleteButton.addEventListener('click', () => {
+                deleteTask(tasks.findIndex(t => t === task)); // Find the actual index in the original tasks array
+            });
+    
+            taskElement.appendChild(titleElement);
+            taskElement.appendChild(descriptionElement);
+            taskElement.appendChild(importantElement);
+            taskElement.appendChild(statusElement);
+            taskElement.appendChild(editButton);
+            taskElement.appendChild(deleteButton);
+    
+            taskContainer.appendChild(taskElement);
+        });
+    }
+    
+    function loadImportantTasks() {
+        let tasks = JSON.parse(localStorage.getItem('tasksData')) || [];
+        const taskContainer = document.querySelector('.all');
+    
+        taskContainer.innerHTML = '';
+        const importantTasks = tasks.filter(task => task.isImportant);
+    
+        importantTasks.forEach((task, index) => {
+            const taskElement = document.createElement('div');
+            taskElement.classList.add('task-dsp');
+            taskElement.dataset.index = index;
+    
+            const titleElement = document.createElement('h3');
+            titleElement.textContent = task.title;
+    
+            const descriptionElement = document.createElement('p');
+            descriptionElement.textContent = task.description;
+    
+            const importantElement = document.createElement('p');
+            importantElement.textContent = `Important: ${task.isImportant ? 'Yes' : 'No'}`;
+    
+            const statusElement = document.createElement('p');
+            statusElement.textContent = `Status: ${task.status}`;
+    
+            const editButton = document.createElement('button');
+            editButton.textContent = 'Edit';
+            editButton.classList.add('edit-btn');
+            editButton.addEventListener('click', () => {
+                editTask(tasks.findIndex(t => t === task)); // Find the actual index in the original tasks array
+            });
+    
+            const deleteButton = document.createElement('button');
+            deleteButton.textContent = 'Delete';
+            deleteButton.classList.add('delete-btn');
+            deleteButton.addEventListener('click', () => {
+                deleteTask(tasks.findIndex(t => t === task)); // Find the actual index in the original tasks array
+            });
+    
+            taskElement.appendChild(titleElement);
+            taskElement.appendChild(descriptionElement);
+            taskElement.appendChild(importantElement);
+            taskElement.appendChild(statusElement);
+            taskElement.appendChild(editButton);
+            taskElement.appendChild(deleteButton);
+    
+            taskContainer.appendChild(taskElement);
+        });
+    }
     function loadcompTasks() {
         let tasks = JSON.parse(localStorage.getItem('tasksData')) || [];
         const taskContainer = document.querySelector('.all');
@@ -190,98 +303,24 @@ document.addEventListener('DOMContentLoaded', function() {
                 editTask(tasks.findIndex(t => t === task)); // Find the actual index in the original tasks array
             });
     
+            const deleteButton = document.createElement('button');
+            deleteButton.textContent = 'Delete';
+            deleteButton.classList.add('delete-btn');
+            deleteButton.addEventListener('click', () => {
+                deleteTask(tasks.findIndex(t => t === task)); // Find the actual index in the original tasks array
+            });
+    
             taskElement.appendChild(titleElement);
             taskElement.appendChild(descriptionElement);
             taskElement.appendChild(importantElement);
             taskElement.appendChild(statusElement);
             taskElement.appendChild(editButton);
+            taskElement.appendChild(deleteButton);
     
             taskContainer.appendChild(taskElement);
         });
     }
-    
-
-    function loadPendingTasks() {
-        let tasks = JSON.parse(localStorage.getItem('tasksData')) || [];
-        const taskContainer = document.querySelector('.all');
-
-        taskContainer.innerHTML = '';
-        const pendingTasks = tasks.filter(task => task.status === 'pending');
-
-        pendingTasks.forEach((task, index) => {
-            const taskElement = document.createElement('div');
-            taskElement.classList.add('task-dsp');
-            taskElement.dataset.index = index;
-
-            const titleElement = document.createElement('h3');
-            titleElement.textContent = task.title;
-
-            const descriptionElement = document.createElement('p');
-            descriptionElement.textContent = task.description;
-
-            const importantElement = document.createElement('p');
-            importantElement.textContent = `Important: ${task.isImportant ? 'Yes' : 'No'}`;
-
-            const statusElement = document.createElement('p');
-            statusElement.textContent = `Status: ${task.status}`;
-
-            const editButton = document.createElement('button');
-            editButton.textContent = 'Edit';
-            editButton.classList.add('edit-btn');
-            editButton.addEventListener('click', () => {
-                editTask(index);
-            });
-
-            taskElement.appendChild(titleElement);
-            taskElement.appendChild(descriptionElement);
-            taskElement.appendChild(importantElement);
-            taskElement.appendChild(statusElement);
-            taskElement.appendChild(editButton);
-
-            taskContainer.appendChild(taskElement);
-        });
-    }
-
-    function loadImportantTasks() {
-        let tasks = JSON.parse(localStorage.getItem('tasksData')) || [];
-        const taskContainer = document.querySelector('.all');
-
-        taskContainer.innerHTML = '';
-        const importantTasks = tasks.filter(task => task.isImportant);
-
-        importantTasks.forEach((task, index) => {
-            const taskElement = document.createElement('div');
-            taskElement.classList.add('task-dsp');
-            taskElement.dataset.index = index;
-
-            const titleElement = document.createElement('h3');
-            titleElement.textContent = task.title;
-
-            const descriptionElement = document.createElement('p');
-            descriptionElement.textContent = task.description;
-
-            const importantElement = document.createElement('p');
-            importantElement.textContent = 'Important: Yes';
-
-            const statusElement = document.createElement('p');
-            statusElement.textContent = `Status: ${task.status}`;
-
-            const editButton = document.createElement('button');
-            editButton.textContent = 'Edit';
-            editButton.classList.add('edit-btn');
-            editButton.addEventListener('click', () => {
-                editTask(index);
-            });
-
-            taskElement.appendChild(titleElement);
-            taskElement.appendChild(descriptionElement);
-            taskElement.appendChild(importantElement);
-            taskElement.appendChild(statusElement);
-            taskElement.appendChild(editButton);
-
-            taskContainer.appendChild(taskElement);
-        });
-    }
+        
 
     function editTask(index) {
         const tasks = JSON.parse(localStorage.getItem('tasksData')) || [];
