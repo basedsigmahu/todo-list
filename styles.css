@@ -14,7 +14,7 @@
     border: 1px solid black;
     display: flex;
     flex-direction: column;
-    height: 1000px;
+    height: auto;
 }
 .txt{
     font-size: x-large;
