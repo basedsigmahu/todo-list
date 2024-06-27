@@ -65,10 +65,23 @@ document.addEventListener('DOMContentLoaded', function() {
     
     function deleteTask(index) {
         let tasks = JSON.parse(localStorage.getItem('tasksData')) || [];
+        const taskTitle = tasks[index].title; // Get the title of the task to show in the alert
+    
         tasks.splice(index, 1); // Remove the task at the given index
     
         localStorage.setItem('tasksData', JSON.stringify(tasks)); // Update local storage
-        loadcompTasks(); // Reload the tasks to reflect the deletion
+        alert(`Task "${taskTitle}" has been deleted.`);
+    
+        // Reload the tasks 
+        if (document.querySelector('.all-tab').classList.contains('active')) {
+            loadTasks();
+        } else if (document.querySelector('.pending-tab').classList.contains('active')) {
+            loadPendingTasks();
+        } else if (document.querySelector('.completed-tab').classList.contains('active')) {
+            loadcompTasks();
+        } else if (document.querySelector('.imp-tab').classList.contains('active')) {
+            loadImportantTasks();
+        }
     }
     
     function store() {
@@ -272,6 +285,7 @@ document.addEventListener('DOMContentLoaded', function() {
             taskContainer.appendChild(taskElement);
         });
     }
+    
     function loadcompTasks() {
         let tasks = JSON.parse(localStorage.getItem('tasksData')) || [];
         const taskContainer = document.querySelector('.all');
