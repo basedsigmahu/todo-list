@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>todo-list</title>
     <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Lobster&display=swap" rel="stylesheet">
 </head>
 <body>
     <div id="wrapper">
@@ -46,18 +47,17 @@
                         <label for="importantCheckbox" class="isImp">Important:</label>
                              <input type="checkbox" id="importantCheckbox">
                     </div>
-                    <div class="radio-btn">
-                        <label>Status : </label>
-                        <input type="radio" name="task-status" value="pending" id="pending">
-                        <label for="pending">Pending</label>
-                        <input type="radio" name="task-status" value="completed" id="completed">
-                        <label for="completed">Completed</label>
-                        
+                    <div class="dropdown">
+                        <label for="task-status">Status:</label>
+                        <select name="task-status" id="task-status">
+                            <option value="pending">Pending</option>
+                            <option value="completed">Completed</option>
+                        </select>
                     </div>
+                    
                     <input type="submit" class="submit-btn">
                 </form>
             </div>
-            
             
         </div>
     </div>
