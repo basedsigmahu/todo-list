@@ -93,15 +93,8 @@ document.addEventListener('DOMContentLoaded', function() {
             const description = form.querySelector('.description').value.trim();
             const isImportant = form.querySelector('#importantCheckbox').checked;
 
-            const radioButtons = form.querySelectorAll('input[name="task-status"]');
-            let selectedValue = null;
-
-            for (const radioButton of radioButtons) {
-                if (radioButton.checked) {
-                    selectedValue = radioButton.value;
-                    break;
-                }
-            }
+            const statusSelect = form.querySelector('#task-status');
+            const selectedValue = statusSelect.value;
 
             const errorDiv = form.querySelector('.error');
             errorDiv.innerHTML = '';
@@ -335,7 +328,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
         
-
     function editTask(index) {
         const tasks = JSON.parse(localStorage.getItem('tasksData')) || [];
         const task = tasks[index];
@@ -347,7 +339,7 @@ document.addEventListener('DOMContentLoaded', function() {
         form.querySelector('.title').value = task.title;
         form.querySelector('.description').value = task.description;
         form.querySelector('#importantCheckbox').checked = task.isImportant;
-        form.querySelector(`input[name="task-status"][value="${task.status}"]`).checked = true;
+        form.querySelector('#task-status').value = task.status;
     
         form.onsubmit = function(event) {
             event.preventDefault();
@@ -355,7 +347,7 @@ document.addEventListener('DOMContentLoaded', function() {
             task.title = sanitizeInput(form.querySelector('.title').value.trim());
             task.description = sanitizeInput(form.querySelector('.description').value.trim());
             task.isImportant = form.querySelector('#importantCheckbox').checked;
-            task.status = form.querySelector('input[name="task-status"]:checked').value;
+            task.status = form.querySelector('#task-status').value;
     
             localStorage.setItem('tasksData', JSON.stringify(tasks));
             modalMain.classList.add('hide');
@@ -363,7 +355,6 @@ document.addEventListener('DOMContentLoaded', function() {
         };
     }
     
-
     function resetForm() {
         const form = document.querySelector('.modal-main form');
         form.reset();
