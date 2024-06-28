@@ -174,11 +174,11 @@ input[type="text"]:focus, textarea:focus {
   margin-right: 10px;
 }
 
-
-.allmain{
-  justify-self: center; 
-  align-self: center; 
+.allmain {
+  justify-self: center;
+  align-self: center;
 }
+
 .all {
   display: flex;
   flex-direction: column;
@@ -186,10 +186,19 @@ input[type="text"]:focus, textarea:focus {
   width: 900px;
   margin-top: 25px;
   border-radius: 12px;
-  background-color: beige;
+  background-color: #f5f5dc; /* Light beige color */
   height: auto;
   padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  font-family: 'Roboto', sans-serif;
 }
+
+.all:hover {
+  background-color: #eee8aa; /* Pale goldenrod color */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
 .task-dsp {
   display: flex;
   flex-direction: column;
@@ -198,9 +207,48 @@ input[type="text"]:focus, textarea:focus {
   margin: 10px 0;
   height: auto;
   border-radius: 15px;
-  background-color: aqua;
-  padding: 10px;
+  background-color: #00ffff; /* Aqua color */
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
+
+.task-dsp:hover {
+  background-color: #7fffd4; /* Aquamarine color */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.task-dsp h3 {
+  margin: 0;
+  padding: 5px 0;
+  color: #2f4f4f; /* Dark slate gray color */
+  font-family: 'Lobster', cursive;
+}
+
+.task-dsp p {
+  margin: 5px 0;
+  padding: 5px 0;
+  color: #696969; /* Dim gray color */
+  font-family: 'Roboto', sans-serif;
+}
+
+.task-dsp button {
+  margin: 5px;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 5px;
+  background-color: #4682b4; /* Steel blue color */
+  font-family: 'Roboto', sans-serif;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.task-dsp button:hover {
+  background-color: #5f9ea0; /* Cadet blue color */
+}
+
+
 .edit-btn {
   width: 80px;
   height: 30px;
