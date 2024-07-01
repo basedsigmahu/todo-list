@@ -1,84 +1,92 @@
 * {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
+
 #wrapper {
-    height: 100vh;
-    overflow-y: auto;
-    overflow-x: hidden;
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
-.container{
-    width: 1200px;
-    margin: 10px auto;
-    border: 1px solid black;
-    display: flex;
-    flex-direction: column;
-    height: auto;
+
+.container {
+  width: 1200px;
+  margin: 10px auto;
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  height: auto;
 }
-.txt{
-    font-size: x-large;
-    font-weight: bold;
-    margin: 8px;
+
+.txt {
+  font-size: x-large;
+  font-weight: bold;
+  margin: 8px;
 }
-hr{
-    margin-top: 7px;
-    margin-bottom: 7px;
+
+hr {
+  margin-top: 7px;
+  margin-bottom: 7px;
 }
-.create-task{
-    margin-left: auto;
-    margin-right: 10px;
-    width: 90px;
-    height: 30px;
-    border-radius: 4px;
+
+.create-task {
+  margin-left: auto;
+  margin-right: 10px;
+  width: 90px;
+  height: 30px;
+  border-radius: 4px;
+  cursor: pointer;
 }
-.create-task:hover{
-cursor: pointer;
+
+.create-task:hover {
+  background-color: #ddd; /* Add a background color on hover for the create task button */
 }
 
 .state-of-task {
-    display: flex;
-    border-bottom: 2px solid #ccc;
-    width: 1000px;
-    margin-top: 20px;
-    align-self: center;
-  }
-  
-  .state-of-task button {
-    
-    flex: 1;
-    padding: 10px 20px;
-    background-color: #f1f1f1;
-    border: 2px solid black;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s, border-bottom-color 0.3s;
-  }
-  
-  .state-of-task button:not(:last-child) {
-    border-right: 1px solid #ccc;
-  }
-  
-  .state-of-task button:hover,
-  .state-of-task button.active {
-    background-color: #ddd;
-    border-bottom: 3px solid #2196F3;
-  }
-  .state-of-task button.active {
-    background-color: #2196F3;
-    color: white;}
-  
-  .state-of-task button:focus {
-    outline: none;
-  }
+  display: flex;
+  border-bottom: 2px solid #ccc;
+  width: 1000px;
+  margin-top: 20px;
+  align-self: center;
+}
 
- .radio-btn{
+.state-of-task button {
+  flex: 1;
+  padding: 10px 20px;
+  background-color: #f1f1f1;
+  border: 2px solid black;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s, border-bottom-color 0.3s;
+}
+
+.state-of-task button:not(:last-child) {
+  border-right: 1px solid #ccc;
+}
+
+.state-of-task button:hover,
+.state-of-task button.active {
+  background-color: #ddd;
+  border-bottom: 3px solid #2196F3;
+}
+
+.state-of-task button.active {
+  background-color: #2196F3;
+  color: white;
+}
+
+.state-of-task button:focus {
+  outline: none;
+}
+
+.radio-btn {
   display: flex;
   justify-self: baseline;
   gap: 5px;
- }
+}
 
- .hide {
+.hide {
   display: none !important;
 }
 
@@ -98,14 +106,14 @@ cursor: pointer;
 
 .modal {
   background: white;
-  padding: 30px; /*  padding for  spacing */
-  border-radius: 12px; 
+  padding: 30px; /* Padding for spacing */
+  border-radius: 12px;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Deeper shadow */
-  max-width: 600px; 
+  max-width: 600px;
   width: 100%;
-  margin: 0 20px; 
-  position: relative; 
-  transition: transform 0.3s ease, opacity 0.3s ease; 
+  margin: 0 20px;
+  position: relative;
+  transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
 .close-btn {
@@ -115,41 +123,40 @@ cursor: pointer;
   margin: 0;
   outline: none;
   cursor: pointer;
-  position: absolute; 
-  top: 20px; 
-  right: 20px; 
+  position: absolute;
+  top: 20px;
+  right: 20px;
   font-size: 24px;
   color: #aaa;
-  transition: color 0.3s; 
+  transition: color 0.3s;
 }
 
 .close-btn:hover {
-  color: #f44336; 
+  color: #f44336;
 }
 
 .submit-btn {
-  width: 100px; 
-  height: 35px; 
+  width: 100px;
+  height: 35px;
   border-radius: 4px;
   cursor: pointer;
-  background-color: #4CAF50; 
-  color: white; 
-  border: none; 
-  font-size: 16px; 
-  transition: background-color 0.3s; 
-  display: block; 
-  margin: 20px auto 0; 
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  font-size: 16px;
+  transition: background-color 0.3s;
+  display: block;
+  margin: 20px auto 0;
 }
 
 .submit-btn:hover {
-  background-color: #45a049; 
+  background-color: #45a049;
 }
 
 .submit-btn:active {
-  background-color: #3e8e41; 
+  background-color: #3e8e41;
 }
 
-/* Additional styling for form elements */
 input[type="text"], textarea {
   width: 100%;
   padding: 10px;
@@ -165,7 +172,6 @@ input[type="text"]:focus, textarea:focus {
   outline: none; /* Remove default outline */
 }
 
-/* Styling for the checkbox and radio buttons */
 .checkbox-container, .radio-btn {
   margin: 10px 0;
 }
@@ -248,7 +254,6 @@ input[type="text"]:focus, textarea:focus {
   background-color: #5f9ea0; /* Cadet blue color */
 }
 
-
 .edit-btn {
   width: 80px;
   height: 30px;
@@ -269,7 +274,7 @@ input[type="text"]:focus, textarea:focus {
 .delete-btn {
   width: 80px;
   height: 30px;
-  background-color: #ff4d4d; /* Red color */
+  background-color: #dc3545 !important;
   color: white;
   border: none;
   font-size: 14px;
@@ -282,7 +287,7 @@ input[type="text"]:focus, textarea:focus {
 }
 
 .delete-btn:hover {
-  background-color: #ff1a1a; /* Darker red on hover */
+  background-color: #c82333 !important; /* Darker red on hover */
 }
 
 @media (max-width: 768px) {
@@ -307,10 +312,10 @@ input[type="text"]:focus, textarea:focus {
   }
   .container, .task-dsp {
     border: none;
-}
-hr {
+  }
+  hr {
     display: none;
-}
+  }
 }
 
 @media (max-width: 480px) {
@@ -326,9 +331,8 @@ hr {
   }
   .container, .task-dsp {
     border: none;
-}
-hr {
+  }
+  hr {
     display: none;
+  }
 }
-}
-  
