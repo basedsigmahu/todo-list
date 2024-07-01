@@ -67,20 +67,21 @@ document.addEventListener('DOMContentLoaded', function() {
         let tasks = JSON.parse(localStorage.getItem('tasksData')) || [];
         const taskTitle = tasks[index].title; // Get the title of the task to show in the alert
     
-        tasks.splice(index, 1); // Remove the task at the given index
-    
-        localStorage.setItem('tasksData', JSON.stringify(tasks)); // Update local storage
-        alert(`Task "${taskTitle}" has been deleted.`);
-    
-        // Reload the tasks 
-        if (document.querySelector('.all-tab').classList.contains('active')) {
-            loadTasks();
-        } else if (document.querySelector('.pending-tab').classList.contains('active')) {
-            loadPendingTasks();
-        } else if (document.querySelector('.completed-tab').classList.contains('active')) {
-            loadcompTasks();
-        } else if (document.querySelector('.imp-tab').classList.contains('active')) {
-            loadImportantTasks();
+        const confirmDelete = confirm(`Are you sure you want to delete the task "${taskTitle}"?`);
+        if (confirmDelete) {
+            tasks.splice(index, 1); // Remove the task at the given index
+            localStorage.setItem('tasksData', JSON.stringify(tasks)); // Update local storage
+           // alert(`Task "${taskTitle}" has been deleted.`);
+            // Reload the tasks 
+            if (document.querySelector('.all-tab').classList.contains('active')) {
+                loadTasks();
+            } else if (document.querySelector('.pending-tab').classList.contains('active')) {
+                loadPendingTasks();
+            } else if (document.querySelector('.completed-tab').classList.contains('active')) {
+                loadcompTasks();
+            } else if (document.querySelector('.imp-tab').classList.contains('active')) {
+                loadImportantTasks();
+            }
         }
     }
     
