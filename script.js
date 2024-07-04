@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (confirmDelete) {
             tasks.splice(index, 1); // Remove the task at the given index
             localStorage.setItem('tasksData', JSON.stringify(tasks)); // Update local storage
-           // alert(`Task "${taskTitle}" has been deleted.`);
+
             // Reload the tasks 
             if (document.querySelector('.all-tab').classList.contains('active')) {
                 loadTasks();
@@ -127,8 +127,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             localStorage.setItem('tasksData', JSON.stringify(tasks));
 
-            const modal = document.querySelector('.modal-main');
-            modal.classList.add('hide');
+            modalMain.classList.add('hide');
             form.reset();
             loadTasks();
         });
@@ -141,43 +140,7 @@ document.addEventListener('DOMContentLoaded', function() {
         taskContainer.innerHTML = '';
     
         tasks.forEach((task, index) => {
-            const taskElement = document.createElement('div');
-            taskElement.classList.add('task-dsp');
-            taskElement.dataset.index = index;
-    
-            const titleElement = document.createElement('h3');
-            titleElement.textContent = task.title;
-    
-            const descriptionElement = document.createElement('p');
-            descriptionElement.textContent = task.description;
-    
-            const importantElement = document.createElement('p');
-            importantElement.textContent = `Important: ${task.isImportant ? 'Yes' : 'No'}`;
-    
-            const statusElement = document.createElement('p');
-            statusElement.textContent = `Status: ${task.status}`;
-    
-            const editButton = document.createElement('button');
-            editButton.textContent = 'Edit';
-            editButton.classList.add('edit-btn');
-            editButton.addEventListener('click', () => {
-                editTask(index);
-            });
-    
-            const deleteButton = document.createElement('button');
-            deleteButton.textContent = 'Delete';
-            deleteButton.classList.add('delete-btn');
-            deleteButton.addEventListener('click', () => {
-                deleteTask(index);
-            });
-    
-            taskElement.appendChild(titleElement);
-            taskElement.appendChild(descriptionElement);
-            taskElement.appendChild(importantElement);
-            taskElement.appendChild(statusElement);
-            taskElement.appendChild(editButton);
-            taskElement.appendChild(deleteButton);
-    
+            const taskElement = createTaskElement(task, index);
             taskContainer.appendChild(taskElement);
         });
     }
@@ -190,43 +153,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const pendingTasks = tasks.filter(task => task.status === 'pending');
     
         pendingTasks.forEach((task, index) => {
-            const taskElement = document.createElement('div');
-            taskElement.classList.add('task-dsp');
-            taskElement.dataset.index = index;
-    
-            const titleElement = document.createElement('h3');
-            titleElement.textContent = task.title;
-    
-            const descriptionElement = document.createElement('p');
-            descriptionElement.textContent = task.description;
-    
-            const importantElement = document.createElement('p');
-            importantElement.textContent = `Important: ${task.isImportant ? 'Yes' : 'No'}`;
-    
-            const statusElement = document.createElement('p');
-            statusElement.textContent = `Status: ${task.status}`;
-    
-            const editButton = document.createElement('button');
-            editButton.textContent = 'Edit';
-            editButton.classList.add('edit-btn');
-            editButton.addEventListener('click', () => {
-                editTask(tasks.findIndex(t => t === task)); // Find the actual index in the original tasks array
-            });
-    
-            const deleteButton = document.createElement('button');
-            deleteButton.textContent = 'Delete';
-            deleteButton.classList.add('delete-btn');
-            deleteButton.addEventListener('click', () => {
-                deleteTask(tasks.findIndex(t => t === task)); // Find the actual index in the original tasks array
-            });
-    
-            taskElement.appendChild(titleElement);
-            taskElement.appendChild(descriptionElement);
-            taskElement.appendChild(importantElement);
-            taskElement.appendChild(statusElement);
-            taskElement.appendChild(editButton);
-            taskElement.appendChild(deleteButton);
-    
+            const taskElement = createTaskElement(task, index);
             taskContainer.appendChild(taskElement);
         });
     }
@@ -239,43 +166,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const importantTasks = tasks.filter(task => task.isImportant);
     
         importantTasks.forEach((task, index) => {
-            const taskElement = document.createElement('div');
-            taskElement.classList.add('task-dsp');
-            taskElement.dataset.index = index;
-    
-            const titleElement = document.createElement('h3');
-            titleElement.textContent = task.title;
-    
-            const descriptionElement = document.createElement('p');
-            descriptionElement.textContent = task.description;
-    
-            const importantElement = document.createElement('p');
-            importantElement.textContent = `Important: ${task.isImportant ? 'Yes' : 'No'}`;
-    
-            const statusElement = document.createElement('p');
-            statusElement.textContent = `Status: ${task.status}`;
-    
-            const editButton = document.createElement('button');
-            editButton.textContent = 'Edit';
-            editButton.classList.add('edit-btn');
-            editButton.addEventListener('click', () => {
-                editTask(tasks.findIndex(t => t === task)); // Find the actual index in the original tasks array
-            });
-    
-            const deleteButton = document.createElement('button');
-            deleteButton.textContent = 'Delete';
-            deleteButton.classList.add('delete-btn');
-            deleteButton.addEventListener('click', () => {
-                deleteTask(tasks.findIndex(t => t === task)); // Find the actual index in the original tasks array
-            });
-    
-            taskElement.appendChild(titleElement);
-            taskElement.appendChild(descriptionElement);
-            taskElement.appendChild(importantElement);
-            taskElement.appendChild(statusElement);
-            taskElement.appendChild(editButton);
-            taskElement.appendChild(deleteButton);
-    
+            const taskElement = createTaskElement(task, index);
             taskContainer.appendChild(taskElement);
         });
     }
@@ -288,72 +179,66 @@ document.addEventListener('DOMContentLoaded', function() {
         const compTasks = tasks.filter(task => task.status === 'completed');
     
         compTasks.forEach((task, index) => {
-            const taskElement = document.createElement('div');
-            taskElement.classList.add('task-dsp');
-            taskElement.dataset.index = index;
-    
-            const titleElement = document.createElement('h3');
-            titleElement.textContent = task.title;
-    
-            const descriptionElement = document.createElement('p');
-            descriptionElement.textContent = task.description;
-    
-            const importantElement = document.createElement('p');
-            importantElement.textContent = `Important: ${task.isImportant ? 'Yes' : 'No'}`;
-    
-            const statusElement = document.createElement('p');
-            statusElement.textContent = `Status: ${task.status}`;
-    
-            const editButton = document.createElement('button');
-            editButton.textContent = 'Edit';
-            editButton.classList.add('edit-btn');
-            editButton.addEventListener('click', () => {
-                editTask(tasks.findIndex(t => t === task)); // Find the actual index in the original tasks array
-            });
-    
-            const deleteButton = document.createElement('button');
-            deleteButton.textContent = 'Delete';
-            deleteButton.classList.add('delete-btn');
-            deleteButton.addEventListener('click', () => {
-                deleteTask(tasks.findIndex(t => t === task)); // Find the actual index in the original tasks array
-            });
-    
-            taskElement.appendChild(titleElement);
-            taskElement.appendChild(descriptionElement);
-            taskElement.appendChild(importantElement);
-            taskElement.appendChild(statusElement);
-            taskElement.appendChild(editButton);
-            taskElement.appendChild(deleteButton);
-    
+            const taskElement = createTaskElement(task, index);
             taskContainer.appendChild(taskElement);
         });
+    }
+
+    function createTaskElement(task, index) {
+        const taskElement = document.createElement('div');
+        taskElement.classList.add('task-dsp');
+        taskElement.dataset.index = index;
+
+        const titleElement = document.createElement('h3');
+        titleElement.textContent = task.title;
+
+        const descriptionElement = document.createElement('p');
+        descriptionElement.textContent = task.description;
+
+        const importantElement = document.createElement('p');
+        importantElement.textContent = `Important: ${task.isImportant ? 'Yes' : 'No'}`;
+
+        const statusElement = document.createElement('p');
+        statusElement.textContent = `Status: ${task.status}`;
+
+        const editButton = document.createElement('button');
+        editButton.textContent = 'Edit';
+        editButton.classList.add('edit-btn');
+        editButton.addEventListener('click', () => {
+            editTask(index);
+        });
+
+        const deleteButton = document.createElement('button');
+        deleteButton.textContent = 'Delete';
+        deleteButton.classList.add('delete-btn');
+        deleteButton.addEventListener('click', () => {
+            deleteTask(index);
+        });
+
+        taskElement.appendChild(titleElement);
+        taskElement.appendChild(descriptionElement);
+        taskElement.appendChild(importantElement);
+        taskElement.appendChild(statusElement);
+        taskElement.appendChild(editButton);
+        taskElement.appendChild(deleteButton);
+
+        return taskElement;
     }
         
     function editTask(index) {
         const tasks = JSON.parse(localStorage.getItem('tasksData')) || [];
         const task = tasks[index];
     
-        const modalMain = document.querySelector('.modal-main');
-        modalMain.classList.remove('hide');
-    
         const form = modalMain.querySelector('form');
         form.querySelector('.title').value = task.title;
         form.querySelector('.description').value = task.description;
         form.querySelector('#importantCheckbox').checked = task.isImportant;
         form.querySelector('#task-status').value = task.status;
-    
-        form.onsubmit = function(event) {
-            event.preventDefault();
-    
-            task.title = sanitizeInput(form.querySelector('.title').value.trim());
-            task.description = sanitizeInput(form.querySelector('.description').value.trim());
-            task.isImportant = form.querySelector('#importantCheckbox').checked;
-            task.status = form.querySelector('#task-status').value;
-    
-            localStorage.setItem('tasksData', JSON.stringify(tasks));
-            modalMain.classList.add('hide');
-            loadcompTasks(); // Reload the completed tasks view
-        };
+        
+        editMode = true;
+        editTaskIndex = index;
+
+        showModal();
     }
     
     function resetForm() {
