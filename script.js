@@ -38,6 +38,7 @@ document.addEventListener('DOMContentLoaded', function() {
         setActiveTab(this);
         document.querySelector('.allmain').classList.remove('hide');
         loadTasks();
+        window.location.hash = '#all';
     });
 
     const compBtn = document.querySelector('.completed-tab');
@@ -45,6 +46,7 @@ document.addEventListener('DOMContentLoaded', function() {
         event.preventDefault();
         setActiveTab(this);
         loadcompTasks();
+        window.location.hash = '#completed';
     });
 
     const pendingBtn = document.querySelector('.pending-tab');
@@ -52,6 +54,7 @@ document.addEventListener('DOMContentLoaded', function() {
         event.preventDefault();
         setActiveTab(this);
         loadPendingTasks();
+        window.location.hash = '#pending';
     });
 
     const impBtn = document.querySelector('.imp-tab');
@@ -59,10 +62,9 @@ document.addEventListener('DOMContentLoaded', function() {
         event.preventDefault();
         setActiveTab(this);
         loadImportantTasks();
+        window.location.hash = '#important';
     });
 
-    allTabButton.click();
-    
     function deleteTask(index) {
         let tasks = JSON.parse(localStorage.getItem('tasksData')) || [];
         const taskTitle = tasks[index].title; // Get the title of the task to show in the alert
@@ -262,4 +264,26 @@ document.addEventListener('DOMContentLoaded', function() {
             errorMessage.textContent = '';
         }, 3000);
     }
+
+    // Load the appropriate tab based on the URL hash
+    function loadTabFromHash() {
+        const hash = window.location.hash;
+
+        if (hash === '#completed') {
+            setActiveTab(compBtn);
+            loadcompTasks();
+        } else if (hash === '#pending') {
+            setActiveTab(pendingBtn);
+            loadPendingTasks();
+        } else if (hash === '#important') {
+            setActiveTab(impBtn);
+            loadImportantTasks();
+        } else {
+            setActiveTab(allTabButton);
+            loadTasks();
+        }
+    }
+
+    // Load the tab from the hash when the page loads
+    loadTabFromHash();
 });
