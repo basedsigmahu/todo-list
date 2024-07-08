@@ -69,14 +69,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function deleteTask(index) {
         let tasks = JSON.parse(localStorage.getItem('tasksData')) || [];
-        const taskTitle = tasks[index].title; // Get the title of the task to show in the alert
-    
+        const taskTitle = tasks[index].title;
+
         const confirmDelete = confirm(`Are you sure you want to delete the task "${taskTitle}"?`);
         if (confirmDelete) {
-            tasks.splice(index, 1); // Remove the task at the given index
-            localStorage.setItem('tasksData', JSON.stringify(tasks)); // Update local storage
+            tasks.splice(index, 1);
+            localStorage.setItem('tasksData', JSON.stringify(tasks));
 
-            // Reload the tasks 
             if (document.querySelector('.all-tab').classList.contains('active')) {
                 loadTasks();
             } else if (document.querySelector('.pending-tab').classList.contains('active')) {
@@ -88,7 +87,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     }
-    
+
     function store() {
         document.querySelector('.modal-main form').addEventListener('submit', function(event) {
             event.preventDefault();
@@ -97,9 +96,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const title = form.querySelector('.title').value.trim();
             const description = form.querySelector('.description').value.trim();
             const isImportant = form.querySelector('#importantCheckbox').checked;
-
-            const statusSelect = form.querySelector('#task-status');
-            const selectedValue = statusSelect.value;
+            const selectedValue = form.querySelector('#task-status').value;
 
             const errorDiv = form.querySelector('.error');
             errorDiv.innerHTML = '';
@@ -140,48 +137,48 @@ document.addEventListener('DOMContentLoaded', function() {
     function loadTasks() {
         let tasks = JSON.parse(localStorage.getItem('tasksData')) || [];
         const taskContainer = document.querySelector('.all');
-    
+
         taskContainer.innerHTML = '';
-    
+
         tasks.forEach((task, index) => {
             const taskElement = createTaskElement(task, index);
             taskContainer.appendChild(taskElement);
         });
     }
-    
+
     function loadPendingTasks() {
         let tasks = JSON.parse(localStorage.getItem('tasksData')) || [];
         const taskContainer = document.querySelector('.all');
-    
+
         taskContainer.innerHTML = '';
         const pendingTasks = tasks.filter(task => task.status === 'pending');
-    
+
         pendingTasks.forEach((task, index) => {
             const taskElement = createTaskElement(task, index);
             taskContainer.appendChild(taskElement);
         });
     }
-    
+
     function loadImportantTasks() {
         let tasks = JSON.parse(localStorage.getItem('tasksData')) || [];
         const taskContainer = document.querySelector('.all');
-    
+
         taskContainer.innerHTML = '';
         const importantTasks = tasks.filter(task => task.isImportant);
-    
+
         importantTasks.forEach((task, index) => {
             const taskElement = createTaskElement(task, index);
             taskContainer.appendChild(taskElement);
         });
     }
-    
+
     function loadcompTasks() {
         let tasks = JSON.parse(localStorage.getItem('tasksData')) || [];
         const taskContainer = document.querySelector('.all');
-    
+
         taskContainer.innerHTML = '';
         const compTasks = tasks.filter(task => task.status === 'completed');
-    
+
         compTasks.forEach((task, index) => {
             const taskElement = createTaskElement(task, index);
             taskContainer.appendChild(taskElement);
@@ -228,23 +225,23 @@ document.addEventListener('DOMContentLoaded', function() {
 
         return taskElement;
     }
-        
+
     function editTask(index) {
         const tasks = JSON.parse(localStorage.getItem('tasksData')) || [];
         const task = tasks[index];
-    
+
         const form = modalMain.querySelector('form');
         form.querySelector('.title').value = task.title;
         form.querySelector('.description').value = task.description;
         form.querySelector('#importantCheckbox').checked = task.isImportant;
         form.querySelector('#task-status').value = task.status;
-        
+
         editMode = true;
         editTaskIndex = index;
 
         showModal();
     }
-    
+
     function resetForm() {
         const form = document.querySelector('.modal-main form');
         form.reset();
@@ -267,7 +264,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 3000);
     }
 
-    // Load the appropriate tab based on the URL hash
     function loadTabFromHash() {
         const hash = window.location.hash;
 
@@ -290,6 +286,5 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Load the tab from the hash when the page loads
     loadTabFromHash();
 });
