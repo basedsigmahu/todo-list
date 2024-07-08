@@ -25,7 +25,6 @@ document.addEventListener('DOMContentLoaded', function() {
     close.addEventListener('click', closeModal);
 
     store();
-    loadTasks();
 
     function setActiveTab(button) {
         tabs.forEach(tab => tab.classList.remove('active'));
@@ -45,6 +44,7 @@ document.addEventListener('DOMContentLoaded', function() {
     compBtn.addEventListener('click', function(event) {
         event.preventDefault();
         setActiveTab(this);
+        document.querySelector('.allmain').classList.remove('hide');
         loadcompTasks();
         window.location.hash = '#completed';
     });
@@ -53,6 +53,7 @@ document.addEventListener('DOMContentLoaded', function() {
     pendingBtn.addEventListener('click', function(event) {
         event.preventDefault();
         setActiveTab(this);
+        document.querySelector('.allmain').classList.remove('hide');
         loadPendingTasks();
         window.location.hash = '#pending';
     });
@@ -61,6 +62,7 @@ document.addEventListener('DOMContentLoaded', function() {
     impBtn.addEventListener('click', function(event) {
         event.preventDefault();
         setActiveTab(this);
+        document.querySelector('.allmain').classList.remove('hide');
         loadImportantTasks();
         window.location.hash = '#important';
     });
@@ -271,15 +273,19 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (hash === '#completed') {
             setActiveTab(compBtn);
+            document.querySelector('.allmain').classList.remove('hide');
             loadcompTasks();
         } else if (hash === '#pending') {
             setActiveTab(pendingBtn);
+            document.querySelector('.allmain').classList.remove('hide');
             loadPendingTasks();
         } else if (hash === '#important') {
             setActiveTab(impBtn);
+            document.querySelector('.allmain').classList.remove('hide');
             loadImportantTasks();
         } else {
             setActiveTab(allTabButton);
+            document.querySelector('.allmain').classList.remove('hide');
             loadTasks();
         }
     }
